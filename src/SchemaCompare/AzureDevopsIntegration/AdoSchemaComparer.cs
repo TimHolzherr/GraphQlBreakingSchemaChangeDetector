@@ -1,15 +1,13 @@
-﻿using SchemaCompare;
+﻿namespace SchemaCompare;
 
-namespace BreakingChangeDetector;
-
-public class BreakingSchemaChangeInAdoPrDetector
+public class AdoSchemaComparer
 {
 
     private readonly SchemaComparer _schemaComparer = new();
     private readonly AzureDevOpsPrCommentCreator _prCreator = new();
     private readonly GitFilesRetriever _gitFileRetriever = new();
 
-    public async Task<bool> DetectBreakingChange(string file)
+    public async Task<bool> ReportBreakingChangesInPr(string file)
     {
         var targetBranch = Environment.GetEnvironmentVariable("SYSTEM_PULLREQUEST_TARGETBRANCH");
         var sourceBranch = Environment.GetEnvironmentVariable("SYSTEM_PULLREQUEST_SOURCEBRANCH");

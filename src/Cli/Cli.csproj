@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<PackAsTool>true</PackAsTool>
+		<PackageId>graphql-breaking-schema-change-detector</PackageId>
+		<PackageVersion>0.0.1</PackageVersion>
+		<PackageProjectUrl>https://github.com/TimHolzherr/GraphQlBreakingSchemaChangeDetector</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/TimHolzherr/GraphQlBreakingSchemaChangeDetector</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageTags>GraphQl</PackageTags>
+		<Title>GraphQl Breaking Schema Change Detector</Title>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
+		<Authors>Tim Holzherr</Authors>
+		<Description>Detects bereaking changes in GraphQl schemas</Description>
+		<ToolCommandName>breaking-change</ToolCommandName>
+		<PackageOutputPath>./nupkg</PackageOutputPath>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="System.CommandLine" Version="2.0.0-beta3.22114.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\SchemaCompare\SchemaCompare.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\..\readme.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+</Project>

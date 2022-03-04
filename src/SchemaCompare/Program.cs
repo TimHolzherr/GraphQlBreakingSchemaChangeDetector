@@ -1,5 +1,4 @@
-﻿using BreakingChangeDetector;
-using SchemaCompare;
+﻿using SchemaCompare;
 
 public static class Program
 {
@@ -20,8 +19,8 @@ public static class Program
     {
         if (!string.IsNullOrEmpty(adoPrFileWatch))
         {
-            var adoPrDetector = new BreakingSchemaChangeInAdoPrDetector();
-            var result = await adoPrDetector.DetectBreakingChange(adoPrFileWatch);
+            var adoPrDetector = new AdoSchemaComparer();
+            var result = await adoPrDetector.ReportBreakingChangesInPr(adoPrFileWatch);
 
             return result ? 0 : 1;
         }

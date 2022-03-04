@@ -1,3 +1,3 @@
-﻿namespace BreakingChangeDetector;
+﻿namespace SchemaCompare;
 
 record Comment(int ParentCommentId, string Content, string CommentType);

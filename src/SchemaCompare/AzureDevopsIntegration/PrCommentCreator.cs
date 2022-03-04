@@ -1,6 +1,6 @@
 ﻿using System.Net.Http.Json;
 
-namespace BreakingChangeDetector;
+namespace SchemaCompare;
 
 public class AzureDevOpsPrCommentCreator
 {
