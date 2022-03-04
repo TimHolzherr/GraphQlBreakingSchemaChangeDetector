@@ -6,22 +6,15 @@ public class AdoSchemaComparer
 {
 
     private readonly SchemaComparer _schemaComparer = new();
-    private readonly AzureDevOpsPrCommentCreator _prCreator = new();
-    private readonly GitFilesRetriever _gitFileRetriever = new();
+    private readonly GitFilesRetriever _gitFiles = new();
 
     public async Task<bool> ReportBreakingChangesInPr(string file)
     {
-        var targetBranch = Environment.GetEnvironmentVariable("SYSTEM_PULLREQUEST_TARGETBRANCH");
-        var sourceBranch = Environment.GetEnvironmentVariable("SYSTEM_PULLREQUEST_SOURCEBRANCH");
+        var variables = new Variables();
+        var prCreator = new AzureDevOpsPrCommentCreator(variables);
 
-        if (targetBranch == null || sourceBranch == null)
-        {
-            throw new ArgumentNullException(
-                $"The environment variables SYSTEM_PULLREQUEST_TARGETBRANCH and SYSTEM_PULLREQUEST_SOURCEBRANCH must be set");
-        }
-
-        var oldFile = await _gitFileRetriever.GetFileAsync(ReplaceBranchLocation(targetBranch), file);
-        var newFile = await _gitFileRetriever.GetFileAsync(ReplaceBranchLocation(sourceBranch), file);
+        var oldFile = await _gitFiles.GetFileAsync(FixBranchPrefix(variables.TargetBranch), file);
+        var newFile = await _gitFiles.GetFileAsync(FixBranchPrefix(variables.SourceBranch), file);
 
         IList<BreakingChange> breakingChanges =
             _schemaComparer.DetectBreakingChanges(oldFile, newFile);
@@ -33,7 +26,7 @@ public class AdoSchemaComparer
         {
             Console.WriteLine($"Breaking change: {breakingChange}");
 
-            var success = await _prCreator.PostCommentOnAzureDevOpsPr(file,
+            var success = await prCreator.PostCommentOnAzureDevOpsPr(file,
                 breakingChange.Message,
                 breakingChange.LineNumber ?? 1);
 
@@ -47,7 +40,7 @@ public class AdoSchemaComparer
         return result;
     }
 
-    private static string ReplaceBranchLocation(string branch)
+    private static string FixBranchPrefix(string branch)
     {
         return branch.Replace("refs/heads/", "remotes/origin/");
     }
