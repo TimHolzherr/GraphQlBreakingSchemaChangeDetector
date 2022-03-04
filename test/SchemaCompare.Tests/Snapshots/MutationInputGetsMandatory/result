@@ -1,0 +1,1 @@
+[{"Message":"Parameter id of completeSignature is not allowed to become mandatory","LineNumber":3},{"Message":"Argument otherId is missing","LineNumber":4},{"Message":"Cannot add a mandatory argument otherId to test","LineNumber":5}]

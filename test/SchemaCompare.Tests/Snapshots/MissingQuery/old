@@ -1,0 +1,29 @@
+type Query {
+  countries(where: CountryFilter): [Country!]!  
+  company(id: Uuid!): Company!
+}
+
+type Company {
+  name: String!
+  id: Uuid!  
+}
+
+scalar Uuid
+
+input CountryFilter {
+  AND: [CountryFilter!]
+  iso2: String
+  iso3: String
+  OR: [CountryFilter!]
+  unId: Int
+  unId_in: [Int!]
+}
+
+type Country implements Node {
+  countryName: String!
+  fimPId: Int
+  id: ID!
+  iso2: String!
+  iso3: String!
+  unId: Int!
+}

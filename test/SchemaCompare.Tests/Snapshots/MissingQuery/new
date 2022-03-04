@@ -1,0 +1,10 @@
+type Query {  
+  company(id: Uuid!): Company!
+}
+
+type Company {
+  name: String!
+  id: Uuid!  
+}
+
+scalar Uuid

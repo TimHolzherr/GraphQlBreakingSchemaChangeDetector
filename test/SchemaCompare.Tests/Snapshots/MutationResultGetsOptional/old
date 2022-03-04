@@ -1,0 +1,11 @@
+
+type Mutation {
+  completeSignature(id: Uuid): Payload!
+  abortSignature(id: Uuid!): Payload!
+}
+
+type Payload {
+  error: String
+}
+
+scalar Uuid
