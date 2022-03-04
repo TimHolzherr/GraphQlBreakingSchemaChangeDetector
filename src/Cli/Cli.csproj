@@ -7,7 +7,7 @@
 		<Nullable>enable</Nullable>
 		<PackAsTool>true</PackAsTool>
 		<PackageId>graphql-breaking-schema-change-detector</PackageId>
-		<PackageVersion>0.0.1</PackageVersion>
+		<PackageVersion>0.0.2</PackageVersion>
 		<PackageProjectUrl>https://github.com/TimHolzherr/GraphQlBreakingSchemaChangeDetector</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/TimHolzherr/GraphQlBreakingSchemaChangeDetector</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
@@ -30,8 +30,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Integration\AzureDevops\AzureDevops.csproj" />
-	  <ProjectReference Include="..\SchemaCompare\SchemaCompare.csproj" />
+		<ProjectReference Include="..\Integration\AzureDevops\AzureDevops.csproj" />
+		<ProjectReference Include="..\SchemaCompare\SchemaCompare.csproj" />
 	</ItemGroup>
 
 </Project>
