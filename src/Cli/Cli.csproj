@@ -26,11 +26,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\SchemaCompare\SchemaCompare.csproj" />
+		<None Include="..\..\readme.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Include="..\..\readme.md" Pack="true" PackagePath="\" />
+	  <ProjectReference Include="..\Integration\AzureDevops\AzureDevops.csproj" />
+	  <ProjectReference Include="..\SchemaCompare\SchemaCompare.csproj" />
 	</ItemGroup>
 
 </Project>

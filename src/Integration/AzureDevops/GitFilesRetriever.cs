@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace SchemaCompare;
+namespace AzureDevops;
 
 public class GitFilesRetriever
 {

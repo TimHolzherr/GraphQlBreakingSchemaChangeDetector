@@ -1,6 +1,6 @@
 ﻿using System.Net.Http.Json;
 
-namespace SchemaCompare;
+namespace AzureDevops;
 
 public class AzureDevOpsPrCommentCreator
 {
@@ -22,8 +22,6 @@ public class AzureDevOpsPrCommentCreator
 
         var url =
             $"{collectionUri}{teamProjectId}/_apis/git/repositories/{repoName}/pullRequests/{prId}/threads?api-version=5.1";
-
-        
 
         var thread = new Thread(new List<Comment> { new(0, comment, "codeChange") },
             "active",

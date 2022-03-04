@@ -1,6 +1,6 @@
 ﻿using System.CommandLine;
 using System.CommandLine.Invocation;
-using SchemaCompare;
+using AzureDevops;
 
 namespace Cli;
 

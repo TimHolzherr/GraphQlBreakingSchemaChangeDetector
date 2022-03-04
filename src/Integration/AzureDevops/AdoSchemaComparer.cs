@@ -1,4 +1,6 @@
-﻿namespace SchemaCompare;
+﻿using SchemaCompare;
+
+namespace AzureDevops;
 
 public class AdoSchemaComparer
 {
