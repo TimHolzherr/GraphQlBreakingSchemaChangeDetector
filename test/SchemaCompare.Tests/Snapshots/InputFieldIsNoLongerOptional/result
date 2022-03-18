@@ -1,1 +1,1 @@
-[{"Message":"Field lastName is not allowed to change from optional to mandatory in type UserInput","LineNumber":25}]
+[{"Message":"Violation of IR 1: Field lastName is not allowed to change type from optional to mandatory in UserInput","LineNumber":25}]

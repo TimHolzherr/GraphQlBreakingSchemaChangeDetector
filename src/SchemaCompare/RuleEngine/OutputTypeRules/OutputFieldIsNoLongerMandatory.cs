@@ -28,6 +28,4 @@ public class OutputFieldIsNoLongerMandatory : IOutputTypeRule
     {
         return oldType.IsNonNullType() && !newType.IsNonNullType();
     }
-
-    
 }

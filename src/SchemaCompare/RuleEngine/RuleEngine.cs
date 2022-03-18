@@ -15,7 +15,6 @@ public class RuleEngine
     {
         new InputFieldIsNoLongerOptional(),
         new NoMissingInputFieldRule(),
-        new ListItemNoLongerOptional()
     };
 
     public BreakingChange? ApplyAllRules(OutputFieldChange outputFieldChange) =>
