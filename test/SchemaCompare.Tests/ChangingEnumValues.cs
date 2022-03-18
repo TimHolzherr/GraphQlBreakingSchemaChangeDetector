@@ -19,7 +19,11 @@ public class ChangingEnumValues
                                 value: String!
                             }
 
-                            enum Baz {
+                            input Baz {
+                                value: Numbers!
+                            }
+
+                            enum Numbers {
                                 FirstValue
                                 SecondValue
                                 ThirdValue
@@ -34,7 +38,11 @@ public class ChangingEnumValues
                                 value: String!
                             }
 
-                            enum Baz {
+                            input Baz {
+                                value: Numbers!
+                            }
+
+                            enum Numbers {
                                 FirstValue                                
                                 ThirdValue
                             }
@@ -45,6 +53,8 @@ public class ChangingEnumValues
 
         // Assert
         Assert.Equal(1, breakingChanges.Count);
+        Assert.Equal(14, breakingChanges[0].LineNumber);
+        Assert.StartsWith("Violation of Rule SR 2", breakingChanges[0].Message);
     }
 
     [Fact]
@@ -128,6 +138,8 @@ public class ChangingEnumValues
 
         // Assert
         Assert.Equal(1, breakingChanges.Count);
+        Assert.Equal(13, breakingChanges[0].LineNumber);
+        Assert.StartsWith("Violation of Rule SR 1", breakingChanges[0].Message);
     }
 
     [Fact]

@@ -44,6 +44,8 @@ public class DisallowAddingNewMandatoryInputFields
 
         // Assert
         Assert.Equal(1, breakingChanges.Count);
+        Assert.StartsWith("Violation of Rule SR 3:", breakingChanges[0].Message);
+        Assert.Equal(12, breakingChanges[0].LineNumber);
     }
 
     [Fact]

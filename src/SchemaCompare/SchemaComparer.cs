@@ -10,7 +10,7 @@ public class SchemaComparer
         DocumentNode oldSchemaNode = Utf8GraphQLParser.Parse(oldSchema);
         DocumentNode newSchemaNode = Utf8GraphQLParser.Parse(newSchema);
 
-        var fieldChanges = oldSchemaNode.Definitions
+        var fieldChangesForOutputTypes = oldSchemaNode.Definitions
             .Select(d => (d as ComplexTypeDefinitionNodeBase))
             .Where(d => d != null)
             .SelectMany(d => d!.Fields, (oldNode, oldField) =>
@@ -36,8 +36,9 @@ public class SchemaComparer
                 return new InputFieldChange(oldNode!, oldField, newNode, newField);
             });
 
-        return fieldChanges.Select(_ruleEngine.ApplyAllRules)
+        return fieldChangesForOutputTypes.Select(_ruleEngine.ApplyAllOutputTypeRules)
             .Concat(fieldChangesForInputTypes.Select(_ruleEngine.ApplyAllRulesToInputTypes))
+            .Concat(_ruleEngine.ApplySpecialCaseRules(oldSchemaNode, newSchemaNode))
             .Where(b => b != null)
             .ToList()!;
     }
