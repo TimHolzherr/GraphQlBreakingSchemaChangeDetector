@@ -7,14 +7,14 @@ public class RuleEngine
         new NoMissingFields(),
         new OutputFieldIsNoLongerMandatory(),
         new OutputFieldTypeChanged(),
-        new IlligalOperationInputChange(),
+        new IllegalOperationInputChange(),
         new NoMissingTypes(),
     };
 
     private readonly List<IInputTypeRule> _inputTypeRules = new()
     {
         new InputFieldIsNoLongerOptional(),
-        new NoMissingInputFieldRule(),
+        new NoMissingInputField(),
     };
 
     public BreakingChange? ApplyAllRules(OutputFieldChange outputFieldChange) =>

@@ -7,7 +7,7 @@
 /// <para>
 /// Otherwise the server would not be able to process the GraqhQl query from an old client.
 /// </para>
-public class NoMissingInputFieldRule : IInputTypeRule
+public class NoMissingInputField : IInputTypeRule
 {
     public BreakingChange? ApplyRule(InputFieldChange fc)
     {

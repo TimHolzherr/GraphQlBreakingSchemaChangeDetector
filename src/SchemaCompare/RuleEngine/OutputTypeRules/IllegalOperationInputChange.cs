@@ -10,7 +10,7 @@ namespace SchemaCompare;
 /// It is also not possible to add a mandatory operation argument.
 /// Otherwise the server will not know how to handle a missing or additional parameter.
 /// </para>
-public class IlligalOperationInputChange : IOutputTypeRule
+public class IllegalOperationInputChange : IOutputTypeRule
 {
     public BreakingChange? ApplyRule(OutputFieldChange fc)
     {
