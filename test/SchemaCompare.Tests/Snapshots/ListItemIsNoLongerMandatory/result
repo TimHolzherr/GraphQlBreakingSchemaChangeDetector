@@ -1,1 +1,2 @@
-[{"Message":"List item in memberName is not allowed to change from mandatory to optional in type UserGroup","LineNumber":25},{"Message":"List item in memberName2 is not allowed to change from mandatory to optional in type UserGroup","LineNumber":26}]
+[{"Message":"Field memberName is not allowed to change type from mandatory to optional in UserGroup","LineNumber":25},{"Message":"Field memberName2 is not allowed to change type from mandatory to optional in UserGroup","LineNumber":26}]
+

@@ -1,6 +1,6 @@
 ﻿namespace SchemaCompare
 {
-    public class NoMissingFieldsRule : IRule
+    public class NoMissingFieldsOutputTypeRule : IOutputTypeRule
     {
         public BreakingChange? ApplyRule(FieldChange fc)
         {

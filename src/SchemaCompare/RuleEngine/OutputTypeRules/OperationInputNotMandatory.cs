@@ -2,7 +2,7 @@
 
 namespace SchemaCompare;
 
-public class OperationInputNotMandatory : IRule
+public class OperationInputNotMandatory : IOutputTypeRule
 {
     public BreakingChange? ApplyRule(FieldChange fc)
     {

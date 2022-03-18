@@ -2,7 +2,7 @@
 
 namespace SchemaCompare;
 
-public class FieldTypeChangeRule : IRule
+public class FieldTypeChangeOutputTypeRule : IOutputTypeRule
 {
     public BreakingChange? ApplyRule(FieldChange fc)
     {

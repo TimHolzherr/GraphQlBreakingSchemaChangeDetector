@@ -2,7 +2,7 @@
 
 namespace SchemaCompare;
 
-public class ListItemNoLongerMandatory : IRule
+public class ListItemNoLongerMandatory : IOutputTypeRule
 {
     public BreakingChange? ApplyRule(FieldChange fc)
     {

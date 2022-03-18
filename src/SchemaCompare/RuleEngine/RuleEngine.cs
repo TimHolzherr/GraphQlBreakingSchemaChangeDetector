@@ -2,11 +2,11 @@
 
 public class RuleEngine
 {
-    private readonly List<IRule> _rules = new()
+    private readonly List<IOutputTypeRule> _rules = new()
     {
-        new NoMissingFieldsRule(),
+        new NoMissingFieldsOutputTypeRule(),
         new FieldIsNoLongerMandatory(),
-        new FieldTypeChangeRule(),
+        new FieldTypeChangeOutputTypeRule(),
         new ListItemNoLongerMandatory(),
         new OperationInputNotMandatory(),
     };

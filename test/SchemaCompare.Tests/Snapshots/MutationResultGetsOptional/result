@@ -1,1 +1,1 @@
-[{"Message":"Field completeSignature is not allowed to change from mandatory to optional in type Mutation","LineNumber":3}]
+[{"Message":"Field completeSignature is not allowed to change type from mandatory to optional in Mutation","LineNumber":3}]
