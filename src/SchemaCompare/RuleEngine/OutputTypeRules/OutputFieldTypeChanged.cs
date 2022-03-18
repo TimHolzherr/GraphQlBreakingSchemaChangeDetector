@@ -13,7 +13,7 @@ namespace SchemaCompare;
 /// </para>
 public class OutputFieldTypeChanged : IOutputTypeRule
 {
-    public BreakingChange? ApplyRule(FieldChange fc)
+    public BreakingChange? ApplyRule(OutputFieldChange fc)
     {
         var oldTypeName =  fc.OldField.Type.NamedType().Name.Value;
         var newTypeName = fc.NewField?.Type.NamedType().Name.Value;

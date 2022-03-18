@@ -9,7 +9,7 @@
 /// </para>
 public class NoMissingFields : IOutputTypeRule
 {
-    public BreakingChange? ApplyRule(FieldChange fc)
+    public BreakingChange? ApplyRule(OutputFieldChange fc)
     {
         if (fc.NewNode != null && fc.NewField == null)
         {

@@ -2,7 +2,7 @@
 
 namespace SchemaCompare;
 
-public record FieldChange(
+public record OutputFieldChange(
     ComplexTypeDefinitionNodeBase OldNode,
     FieldDefinitionNode OldField,
     ComplexTypeDefinitionNodeBase? NewNode,
@@ -29,9 +29,3 @@ public record FieldChange(
                    newType.InnerType().InnerType().InnerType().InnerType().InnerType());
     }
 }
-
-public record InputFieldChange(
-    InputObjectTypeDefinitionNodeBase OldNode,
-    InputValueDefinitionNode OldField,
-    InputObjectTypeDefinitionNodeBase? NewNode,
-    InputValueDefinitionNode? NewField);

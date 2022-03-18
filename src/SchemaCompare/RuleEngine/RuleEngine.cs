@@ -18,8 +18,8 @@ public class RuleEngine
         new ListItemNoLongerOptional()
     };
 
-    public BreakingChange? ApplyAllRules(FieldChange fieldChange) =>
-        _rules.Select(r => r.ApplyRule(fieldChange))
+    public BreakingChange? ApplyAllRules(OutputFieldChange outputFieldChange) =>
+        _rules.Select(r => r.ApplyRule(outputFieldChange))
             .FirstOrDefault(b => b != null);
 
     public BreakingChange? ApplyAllRulesToInputTypes(InputFieldChange fieldChange) =>

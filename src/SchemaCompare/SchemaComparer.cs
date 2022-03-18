@@ -20,7 +20,7 @@ public class SchemaComparer
                     .Where(d => d != null)
                     .SingleOrDefault(d => d!.Name.Equals(oldNode!.Name) && d.Kind == oldNode.Kind);
                 var newField = newNode?.Fields.SingleOrDefault(f => f.Name.Equals(oldField.Name));
-                return new FieldChange(oldNode!, oldField, newNode, newField);
+                return new OutputFieldChange(oldNode!, oldField, newNode, newField);
             });
 
         var fieldChangesForInputTypes = oldSchemaNode.Definitions

@@ -12,7 +12,7 @@ namespace SchemaCompare;
 /// </para>
 public class IlligalOperationInputChange : IOutputTypeRule
 {
-    public BreakingChange? ApplyRule(FieldChange fc)
+    public BreakingChange? ApplyRule(OutputFieldChange fc)
     {
         if (fc.NewNode == null || fc.NewField == null)
         {

@@ -2,5 +2,5 @@
 
 public interface IOutputTypeRule
 {
-    BreakingChange? ApplyRule(FieldChange fc);
+    BreakingChange? ApplyRule(OutputFieldChange fc);
 }

@@ -12,7 +12,7 @@ namespace SchemaCompare;
 /// </para>
 public class OutputFieldIsNoLongerMandatory : IOutputTypeRule
 {
-    public BreakingChange? ApplyRule(FieldChange fc)
+    public BreakingChange? ApplyRule(OutputFieldChange fc)
     {
         if (fc.CheckInnerTypesOfFields(AreTypesViolatingRule))
         {
