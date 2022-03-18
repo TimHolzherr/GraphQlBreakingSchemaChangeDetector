@@ -1,2 +1,2 @@
-[{"Message":"Field memberName is not allowed to change type from mandatory to optional in UserGroup","LineNumber":25},{"Message":"Field memberName2 is not allowed to change type from mandatory to optional in UserGroup","LineNumber":26}]
+[{"Message":"Violation of OR 1: Field memberName is not allowed to change type from mandatory to optional in UserGroup","LineNumber":25},{"Message":"Violation of OR 1: Field memberName2 is not allowed to change type from mandatory to optional in UserGroup","LineNumber":26}]
 

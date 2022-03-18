@@ -17,6 +17,7 @@ public class TestSnapshots
     [InlineData("MissingField")]
     [InlineData("FieldIsNoLongerMandatory")]
     [InlineData("FieldTypeChangedForNonNullable")]
+    [InlineData("FieldTypeChangedForNullable")]
     [InlineData("InputFieldIsNoLongerOptional")]
     [InlineData("InputFieldIsNoLongerMandatory")]
     [InlineData("MissingInputField")]

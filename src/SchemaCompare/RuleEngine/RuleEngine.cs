@@ -4,10 +4,11 @@ public class RuleEngine
 {
     private readonly List<IOutputTypeRule> _rules = new()
     {
-        new NoMissingFieldsOutputTypeRule(),
-        new FieldIsNoLongerMandatory(),
-        new FieldTypeChangeOutputTypeRule(),
-        new OperationInputNotMandatory(),
+        new NoMissingFields(),
+        new OutputFieldIsNoLongerMandatory(),
+        new OutputFieldTypeChanged(),
+        new IlligalOperationInputChange(),
+        new NoMissingTypes(),
     };
 
     private readonly List<IInputTypeRule> _inputTypeRules = new()

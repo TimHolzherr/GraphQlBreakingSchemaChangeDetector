@@ -2,7 +2,15 @@
 
 namespace SchemaCompare;
 
-public class OperationInputNotMandatory : IOutputTypeRule
+/// <summary>
+/// Rule OR 4: Parameters of a operation should not be removed or be set to non optional.
+/// </summary>
+///
+/// <para>
+/// It is also not possible to add a mandatory operation argument.
+/// Otherwise the server will not know how to handle a missing or additional parameter.
+/// </para>
+public class IlligalOperationInputChange : IOutputTypeRule
 {
     public BreakingChange? ApplyRule(FieldChange fc)
     {
@@ -18,14 +26,14 @@ public class OperationInputNotMandatory : IOutputTypeRule
                 var newArgument = fc.NewField.Arguments.FirstOrDefault(a => a.Name.Value == oldArgument.Name.Value);
                 if (newArgument == null)
                 {
-                    return new BreakingChange($"Argument {oldArgument.Name.Value} is missing",
+                    return new BreakingChange($"Violation of OR 4: Argument {oldArgument.Name.Value} is missing",
                         fc.NewField.Location?.Line);
                 }
 
                 if (oldArgument.Type is not NonNullTypeNode && newArgument.Type is NonNullTypeNode)
                 {
                     return new BreakingChange(
-                        $"Parameter {newArgument.Name.Value} of {fc.NewField.Name.Value} is not allowed to become mandatory",
+                        $"Violation of OR 4: Parameter {newArgument.Name.Value} of {fc.NewField.Name.Value} is not allowed to become mandatory",
                         fc.NewField.Location?.Line);
                 }
             }
@@ -38,7 +46,7 @@ public class OperationInputNotMandatory : IOutputTypeRule
             if (newArgument.Type is NonNullTypeNode)
             {
                 return new BreakingChange(
-                    $"Cannot add a mandatory argument {newArgument.Name.Value} to {fc.NewField.Name.Value}",
+                    $"Violation of OR 4: Cannot add a mandatory argument {newArgument.Name.Value} to {fc.NewField.Name.Value}",
                     fc.NewField.Location?.Line);
             }
         }

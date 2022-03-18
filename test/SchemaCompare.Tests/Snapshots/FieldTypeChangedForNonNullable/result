@@ -1,1 +1,1 @@
-[{"Message":"Field lastName is not allowed to change type in type User","LineNumber":25}]
+[{"Message":"Violation of OR 2: Field lastName is not allowed to change type in User","LineNumber":25}]

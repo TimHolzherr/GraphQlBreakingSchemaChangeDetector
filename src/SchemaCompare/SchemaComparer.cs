@@ -36,8 +36,6 @@ public class SchemaComparer
                 return new InputFieldChange(oldNode!, oldField, newNode, newField);
             });
 
-        // TODO: Transform AST into simpler structure so that rules become less tedious to write
-
         return fieldChanges.Select(_ruleEngine.ApplyAllRules)
             .Concat(fieldChangesForInputTypes.Select(_ruleEngine.ApplyAllRulesToInputTypes))
             .Where(b => b != null)
