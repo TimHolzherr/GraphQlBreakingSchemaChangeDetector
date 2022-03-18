@@ -7,7 +7,6 @@ public class RuleEngine
         new NoMissingFieldsOutputTypeRule(),
         new FieldIsNoLongerMandatory(),
         new FieldTypeChangeOutputTypeRule(),
-        new ListItemNoLongerMandatory(),
         new OperationInputNotMandatory(),
     };
 
