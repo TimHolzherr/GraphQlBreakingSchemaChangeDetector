@@ -8,12 +8,11 @@ Includes support for automatic comments creation in Azure Devops Pr pipelines.
 
 The azure devops integration allows you to monitor a graphql schema file for backward incompatibel changes.
 This is valuable when your schema is automatically generated based on your source code.
-A unit test ensures that the schema of your GraphQl service is corresponding to a GraphQl schema file under source control.
-The GraphqlBreakingSchemaChangeDetector can then monitor this file for breaking changes.
+If one of your unit test ensures that the schema of your GraphQl service is corresponding to a GraphQl schema file under source control then the GraphqlBreakingSchemaChangeDetector can monitor this file for breaking changes.
 
-To enable the devops integration 4 steps are needed.
+To enable Azure DevOps integration 4 steps are needed.
 
-1. Create a new yaml file containing the new PR validation build
+1. Create a new yaml file containing the definition of a new PR validation build
 2. Create a new pipeline based on the new yaml file.
 3. Add the new pipeline as a PR Build validation step
 4. Give the Build Agent the needed permissions to create comments on the pull request
@@ -52,11 +51,14 @@ The file path must be relative to the root of your repository. Example: `test/fo
 
 ### Add the new pipeline as a PR Build Validation step
 ![OpenBranchPolicy_redboxes](https://user-images.githubusercontent.com/11144100/156795141-a8b3b244-498e-4f3f-b628-3ed745159a45.png)
-![BuildValidation_redBoxe](https://user-images.githubusercontent.com/11144100/156795179-6a448bc4-9989-4107-843b-f295032c12cd.png)
+
 1. Go to your repository
 2. Choose Repos -> Branches -> Press the three dots on your main branch -> Branch policies
 3. Build Validation -> Plus Sign -> Choose your new pipeline from the "Build pipeline" dropdown
 4. Save
+
+![BuildValidation_redBoxe](https://user-images.githubusercontent.com/11144100/156795179-6a448bc4-9989-4107-843b-f295032c12cd.png)
+
 
 ### Allow the Build Agent to "Contribute to pull requests"
 ![ProjectSettings_GiveBuildAgendAccess_redboxes](https://user-images.githubusercontent.com/11144100/156795271-a39bc8c2-d93a-4f31-b349-b0d878db7ea7.png)
