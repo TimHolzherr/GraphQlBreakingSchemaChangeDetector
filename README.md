@@ -1,4 +1,4 @@
-# GraphQlBreakingSchemaChangeDetector
+# GraphQl Breaking Schema Change Detector
 .Net tool which can detect breaking schema changes in a GraphQl schema.  
 Includes support for automatic comments creation in Azure Devops Pr pipelines.
 
