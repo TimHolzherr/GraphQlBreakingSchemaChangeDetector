@@ -8,7 +8,6 @@ public class RuleEngine
         new OutputFieldIsNoLongerMandatory(),
         new OutputFieldTypeChanged(),
         new IllegalOperationInputChange(),
-        new NoMissingTypes(),
     };
 
     private readonly List<IInputTypeRule> _inputTypeRules = new()

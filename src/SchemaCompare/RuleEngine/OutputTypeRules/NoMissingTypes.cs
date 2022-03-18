@@ -8,6 +8,11 @@
 /// A client could be using GraphQl fragments and thus be relying on the existence of a specific
 /// type. Renaming a type would break the client in this case.
 /// </para>
+/// 
+/// <para>
+/// It is likely that this rule is not needed as the type can only be removed when the corresponding
+/// field using the type is removed. Removing the field will be detected by OR 3.
+/// </para>
 public class NoMissingTypes : IOutputTypeRule
 {
     public BreakingChange? ApplyRule(OutputFieldChange fc)
