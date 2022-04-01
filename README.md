@@ -22,7 +22,7 @@ It can either compare two GraphQl schemas and report breaking changes or it allo
 
 The azure devops integration allows you to monitor a graphql schema file for backward incompatibel changes.
 This is valuable when your schema is automatically generated based on your source code.
-If one of your unit test ensures that the schema of your GraphQl service is corresponding to a GraphQl schema file under source control then the GraphqlBreakingSchemaChangeDetector can monitor this file for breaking changes.
+If one of your unit test ensures that the schema of your GraphQl service is corresponding to a GraphQl schema file under source control then the GraphqlBreakingSchemaChangeDetector can monitor this file for breaking changes (see [example](https://github.com/TimHolzherr/GraphQlBreakingSchemaChangeDetector/tree/main/examples/CodeFirstHotChocolate)).
 
 To enable Azure DevOps integration 4 steps are needed.
 
