@@ -13,13 +13,39 @@ public class Variables
         SourceBranch = GetEnvironmentVariable("SYSTEM_PULLREQUEST_SOURCEBRANCH");
     }
 
-    public string CollectionUri { get; }
-    public string TeamProjectId { get; }
-    public string RepoName { get; }
-    public string PrId { get; }
-    public string AccessToken { get; }
-    public string TargetBranch { get; }
-    public string SourceBranch { get; }
+    private string CollectionUri { get; }
+    private string TeamProjectId { get; }
+    private string RepoName { get; }
+    private string PrId { get; }
+    private string AccessToken { get; }
+    private string TargetBranch { get; }
+    private string SourceBranch { get; }
+
+    public string GetPrUrl()
+    {
+        return $"{CollectionUri}{TeamProjectId}" +
+               $"/_apis/git/repositories/{RepoName}/pullRequests/{PrId}";
+    }
+
+    public string GetAuthorization()
+    {
+        return $"bearer {AccessToken}";
+    }
+
+    public string GetTargetBranch()
+    {
+        return FixBranchPrefix(TargetBranch);
+    }
+
+    public string GetSourceBranch()
+    {
+        return FixBranchPrefix(SourceBranch);
+    }
+
+    private static string FixBranchPrefix(string branch)
+    {
+        return branch.Replace("refs/heads/", "remotes/origin/");
+    }
 
     private string GetEnvironmentVariable(string key)
     {

@@ -33,7 +33,7 @@ public class RemoveEnumValueInInputType : ISpecialCaseRule
             if (removedValue is not null)
             {
                 return new BreakingChange(
-                    $"Violation of Rule SR 2: You cannot remove a value from the {nameOfEnum} because it is used in an input type",
+                    $"Violation of Rule SR 2: You cannot remove a value from the {nameOfEnum} enum because it is used in an input type",
                     newNode.Location?.Line);
             }
         }

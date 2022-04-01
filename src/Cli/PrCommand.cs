@@ -36,8 +36,7 @@ internal static class PrCommand
                 if (platform == Platform.AzureDevops)
                 {
                     var adoSchemaComparer = new AdoSchemaComparer();
-                    var result = await adoSchemaComparer.ReportBreakingChangesInPr(file);
-                    context.ExitCode = result ? 0 : 1;
+                    await adoSchemaComparer.ReportBreakingChangesInPr(file);
                 }
             },
             platformOption,

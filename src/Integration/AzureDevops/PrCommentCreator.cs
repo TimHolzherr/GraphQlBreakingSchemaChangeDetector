@@ -4,35 +4,49 @@ namespace AzureDevops;
 
 public class AzureDevOpsPrCommentCreator
 {
+    private const string ApiVersion = "?api-version=6.0";
     private readonly HttpClient _client = new();
-    private readonly Variables _variables;
+    private readonly string _url;
 
 
     public AzureDevOpsPrCommentCreator(Variables variables)
     {
-        _variables = variables;
-        _client.DefaultRequestHeaders.Add("Authorization", $"bearer {variables.AccessToken}");
+        _url = $"{variables.GetPrUrl()}/threads";
+        _client.DefaultRequestHeaders.Add("Authorization", variables.GetAuthorization());
     }
 
-    public async Task<bool> PostCommentOnAzureDevOpsPr(
+    public async Task<string> PostCommentOnAzureDevOpsPr(
         string filePath,
         string comment,
         int lineNumber)
     {
-        var url = $"{_variables.CollectionUri}{_variables.TeamProjectId}" + 
-                  $"/_apis/git/repositories/{_variables.RepoName}/pullRequests/" + 
-                  $"{_variables.PrId}/threads?api-version=5.1";
-
         var thread = new Thread(new List<Comment> { new(0, comment, "codeChange") },
             "active",
             new ThreadContext($"/{filePath}",
                 new CommentPosition(lineNumber, 1),
                 new CommentPosition(lineNumber + 1, 1)));
 
-        var response = await _client.PostAsJsonAsync(url, thread);
-        var responseString = await response.Content.ReadAsStringAsync();
-        Console.WriteLine(responseString);
+        var response = await _client.PostAsJsonAsync($"{_url}{ApiVersion}", thread);
 
-        return response.IsSuccessStatusCode;
+        if (!response.IsSuccessStatusCode)
+        {
+            Console.WriteLine(await response.Content.ReadAsStringAsync());
+            throw new Exception("Thread creation failed");
+        }
+
+        var result = await response.Content.ReadFromJsonAsync<ThreadResult>();
+
+        return result?.Id.ToString() ?? 
+               throw new Exception("Cannot parse response of thread creation");
+    }
+
+    public async Task DeleteFirstCommentInThread(string threadId)
+    {
+        var response = await _client.DeleteAsync($"{_url}/{threadId}/comments/1{ApiVersion}");
+        if (!response.IsSuccessStatusCode)
+        {
+            var content = await response.Content.ReadAsStringAsync();
+            Console.WriteLine($"Deletion of comment failed: {content}");
+        }
     }
 }
