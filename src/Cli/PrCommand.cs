@@ -1,5 +1,4 @@
 ﻿using System.CommandLine;
-using System.CommandLine.Invocation;
 using AzureDevops;
 
 namespace Cli;
@@ -26,7 +25,7 @@ internal static class PrCommand
             fileOption
         };
 
-        prCommand.SetHandler(async (Platform platform, string file, InvocationContext context) =>
+        prCommand.SetHandler(async (Platform platform, string file) =>
             {
                 if (platform == Platform.Github)
                 {

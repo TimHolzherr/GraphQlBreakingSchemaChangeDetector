@@ -1,0 +1,15 @@
+pr:
+  - main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - task: UseDotNet@2
+    inputs:
+      version: "6.0.x"
+      includePreviewVersions: false
+  - script: |
+      dotnet test examples/CodeFirstHotChocolate/Test/Test.csproj
+
+    displayName: "Run Unit Tests"
