@@ -4,6 +4,20 @@ Includes support for automatic comments creation in Azure Devops Pr pipelines.
 
 ![BreakingChangeDetectorPrComment](https://user-images.githubusercontent.com/11144100/156728254-8897d42b-3440-44f4-aed5-63daa65dad0f.png)
 
+## Why
+When maintaining a GraphQl api the convention is to not version the graph but instead extend it in a backwards compatibel way.  
+The possibility to solve api versioning this way is one of the great strenghts of GraphQl but one needs to ensure that the graph is indeed always backwards compatibel.
+As the name implies the 'GraphQl Breaking Schema Change Detector' allows for automatically detecting such breaking changes. 
+It can either compare two GraphQl schemas and report breaking changes or it allows to validate the schema during pull request stage.
+
+
+
+## How to compare two GraphQl Schemas via Cli
+1. Make sure you have installed the [dotnet sdk](https://dotnet.microsoft.com/en-us/download)
+1. Install the Breaking Change Detector as a global dotnet tool: `dotnet tool install -g graphql-breaking-schema-change-detector`
+1. Compare two schemas with the following command  
+ ```breaking-change file --oldSchema <old schema file> --newSchema <new schema file>```
+
 ## Setup Azure Devops PR Validation
 
 The azure devops integration allows you to monitor a graphql schema file for backward incompatibel changes.
