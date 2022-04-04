@@ -79,3 +79,28 @@ The file path must be relative to the root of your repository. Example: `test/fo
   
 1. Go to Project settings (bottom left)
 2. Repositories -> Choose your repository -> Security Tab -> Users -> Build Agend -> Contribute to pull requests -> Set to Allow
+
+## Troubleshooting
+
+### Issues with Nuget restore
+#### Problem
+```
+/opt/hostedtoolcache/dotnet/sdk/6.0.201/NuGet.targets(130,5): error : Unable to load the service index for source <...>/nuget/v3/index.json. [/tmp/rsb0lugh.s3e/restore.csproj]
+/opt/hostedtoolcache/dotnet/sdk/6.0.201/NuGet.targets(130,5): error :   Response status code does not indicate success: 401 (Unauthorized). [/tmp/rsb0lugh.s3e/restore.csproj]
+The tool package could not be restored.
+Tool 'graphql-breaking-schema-change-detector' failed to install. This failure may have been caused by:
+```
+#### Solution
+It seems that you have configured a private nuget feed for your repository. You need to either add the required authorization before installing the tool, for example with the [nuget-authenticate task](https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/package/nuget-authenticate?view=azure-devops) or falling back to nuget.org by adding the two parameters `--ignore-failed-sources` and `--add-source`  to the instalation command.
+```
+dotnet tool install --ignore-failed-sources --add-source https://api.nuget.org/v3/index.json --tool-path . graphql-breaking-schema-change-detector
+```
+
+### Issue with file not found
+#### Problem
+```
+{"$id":"1","innerException":null,"message":"TF400714: File ID 293829685 not found.","typeName":"Microsoft.TeamFoundation.Framework.Server.FileIdNotFoundException, Microsoft.TeamFoundation.Framework.Server","typeKey":"FileIdNotFoundException","errorCode":0,"eventId":4005}
+Unhandled exception: System.Exception: Reading file <...>.csv from ado pr failed
+```
+#### Solution
+It seems that the path to your schema file is in an incorrect format. Make sure that your path does not start with a dot (`.`) or slash (`/`) and use forward slashes to seperate your folders. Good exampel: `test/__snapshots__/mySchemaSnapshot.snap`. Bad example: `.\src\schema.graphql`
