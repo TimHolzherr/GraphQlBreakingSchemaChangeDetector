@@ -43,7 +43,7 @@ public class AddEnumValuesInOutputType : ISpecialCaseRule
     {
         return oldSchemaNode.Definitions.OfType<ComplexTypeDefinitionNodeBase>()
             .SelectMany(n => n.Fields)
-            .Any(f => f.Type.NamedType().Name.Value == name);
+            .Any(f => f.Type.NamedType().Name.Value == name && !f.IsDeprecated());
     }
 }
 

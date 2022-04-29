@@ -183,4 +183,95 @@ public class ChangingEnumValues
         // Assert
         Assert.Equal(0, breakingChanges.Count);
     }
+
+    [Fact]
+    public void RemoveDeprecatedEnumValueInInputType_CheckRules_NotABreakingChange()
+    {
+        // Arrange
+        var oldSchema = @"
+                            type mutation {
+                                foo(bar: Baz!): FooPayload                                 
+                            }
+
+                            type FooPayload {
+                                value: String!
+                            }
+
+                            input Baz {
+                                value: Numbers!
+                            }
+
+                            enum Numbers {
+                                FirstValue
+                                SecondValue @deprecated(reason: ""no longer supported"")
+                                ThirdValue
+                            }
+                        ";
+        var newSchema = @"
+                            type mutation {
+                                foo(bar: Baz!): FooPayload                                 
+                            }
+
+                            type FooPayload {
+                                value: String!
+                            }
+
+                            input Baz {
+                                value: Numbers!
+                            }
+
+                            enum Numbers {
+                                FirstValue                                
+                                ThirdValue
+                            }
+                        ";
+
+        // Act
+        var breakingChanges = _schemaComparer.DetectBreakingChanges(oldSchema, newSchema);
+
+        // Assert
+        Assert.Equal(0, breakingChanges.Count);
+    }
+
+    [Fact]
+    public void AddEnumValueInDeprecatedOutputType_CheckRules_NotABreakingChange()
+    {
+        // Arrange
+        var oldSchema = @"
+                            type query {
+                                foo: FooPayload                                 
+                            }
+
+                            type FooPayload {
+                                value: Baz! @deprecated(reason: ""Not used anymore"")
+                            }
+
+                            enum Baz {
+                                FirstValue
+                                SecondValue                                
+                            }
+                        ";
+
+        var newSchema = @"
+                            type query {
+                                foo: FooPayload                                 
+                            }
+
+                            type FooPayload {
+                                value: Baz!
+                            }
+
+                            enum Baz {
+                                FirstValue
+                                SecondValue
+                                ThirdValue
+                            }
+                        ";
+
+        // Act
+        var breakingChanges = _schemaComparer.DetectBreakingChanges(oldSchema, newSchema);
+
+        // Assert
+        Assert.Equal(0, breakingChanges.Count);
+    }
 }

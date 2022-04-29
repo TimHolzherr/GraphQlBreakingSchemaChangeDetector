@@ -25,12 +25,10 @@ public class RemoveEnumValueInInputType : ISpecialCaseRule
                 continue;
             }
 
-            var oldValues = oldNode.Values.Select(v => v.Name.Value).ToList();
             var newValues = newNode.Values.Select(v => v.Name.Value).ToList();
-            var removedValue = oldValues.FirstOrDefault(v => !newValues.Contains(v));
+            var removedValue = oldNode.Values.FirstOrDefault(v => !newValues.Contains(v.Name.Value));
 
-
-            if (removedValue is not null)
+            if (removedValue is not null && !removedValue.IsDeprecated())
             {
                 return new BreakingChange(
                     $"Violation of Rule SR 2: You cannot remove a value from the {nameOfEnum} enum because it is used in an input type",

@@ -3,7 +3,7 @@
 namespace SchemaCompare;
 
 /// <summary>
-/// Rule OR 2: In a field is not allowed to change its type.
+/// Rule OR 2: A field is not allowed to change its type.
 /// </summary>
 ///
 /// <para>
