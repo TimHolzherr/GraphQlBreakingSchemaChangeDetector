@@ -63,13 +63,21 @@ public class PersistenceOnPr
             return null;
         }
 
+        var content = await response.Content.ReadAsStringAsync();
+
+        if (response.StatusCode == HttpStatusCode.InternalServerError &&
+            content.Contains("FileIdNotFoundException"))
+        {
+            return null;
+        }
+
         if (response.IsSuccessStatusCode)
         {
-            return await response.Content.ReadAsStringAsync();
+            return content;
         }
 
         Console.WriteLine($"StatusCode was: {response.StatusCode}");
-        Console.WriteLine(await response.Content.ReadAsStringAsync());
+        Console.WriteLine(content);
         throw new Exception($"Reading file {fileName} from ado pr failed");
     }
 
