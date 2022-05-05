@@ -11,29 +11,25 @@ public class SchemaComparer
         DocumentNode newSchemaNode = Utf8GraphQLParser.Parse(newSchema);
 
         var fieldChangesForOutputTypes = oldSchemaNode.Definitions
-            .Select(d => (d as ComplexTypeDefinitionNodeBase))
-            .Where(d => d != null)
-            .SelectMany(d => d!.Fields, (oldNode, oldField) =>
+            .OfType<ComplexTypeDefinitionNodeBase>()
+            .SelectMany(d => d.Fields, (oldNode, oldField) =>
             {
                 var newNode = newSchemaNode.Definitions
-                    .Select(d => d as ComplexTypeDefinitionNodeBase)
-                    .Where(d => d != null)
-                    .SingleOrDefault(d => d!.Name.Equals(oldNode!.Name) && d.Kind == oldNode.Kind);
+                    .OfType<ComplexTypeDefinitionNodeBase>()
+                    .SingleOrDefault(d => d.Name.Equals(oldNode.Name) && d.Kind == oldNode.Kind);
                 var newField = newNode?.Fields.SingleOrDefault(f => f.Name.Equals(oldField.Name));
-                return new OutputFieldChange(oldNode!, oldField, newNode, newField);
+                return new OutputFieldChange(oldNode, oldField, newNode, newField);
             });
 
         var fieldChangesForInputTypes = oldSchemaNode.Definitions
-            .Select(d => d as InputObjectTypeDefinitionNodeBase)
-            .Where(d => d != null)
-            .SelectMany(d => d!.Fields, (oldNode, oldField) =>
+            .OfType<InputObjectTypeDefinitionNodeBase>()
+            .SelectMany(d => d.Fields, (oldNode, oldField) =>
             {
                 var newNode = newSchemaNode.Definitions
-                    .Select(d => d as InputObjectTypeDefinitionNodeBase)
-                    .Where(d => d != null)
-                    .SingleOrDefault(d => d!.Name.Equals(oldNode!.Name) && d.Kind == oldNode.Kind);
+                    .OfType<InputObjectTypeDefinitionNodeBase>()
+                    .SingleOrDefault(d => d.Name.Equals(oldNode.Name) && d.Kind == oldNode.Kind);
                 var newField = newNode?.Fields.SingleOrDefault(f => f.Name.Equals(oldField.Name));
-                return new InputFieldChange(oldNode!, oldField, newNode, newField);
+                return new InputFieldChange(oldNode, oldField, newNode, newField);
             });
 
         return fieldChangesForOutputTypes.Select(_ruleEngine.ApplyAllOutputTypeRules)
