@@ -25,8 +25,17 @@ internal static class FileCommand
         fileCommand.SetHandler((FileInfo oldSchema, FileInfo newSchema) =>
             {
                 var schemaComparer = new SchemaComparer();
-                schemaComparer.DetectBreakingChanges(File.ReadAllText(oldSchema.FullName),
-                    File.ReadAllText(newSchema.FullName));
+                var breakingChanges = schemaComparer.DetectBreakingChanges(File.ReadAllText(oldSchema.FullName), File.ReadAllText(newSchema.FullName));
+
+                if (breakingChanges.Any())
+                {
+                    Console.WriteLine("Breaking changes detected:");
+                    foreach (var breakingChange in breakingChanges)
+                    {
+                        Console.WriteLine(breakingChange);
+                    }
+                    Environment.Exit(1);
+                }
             },
             oldSchemaOption,
             newSchemaOption);
