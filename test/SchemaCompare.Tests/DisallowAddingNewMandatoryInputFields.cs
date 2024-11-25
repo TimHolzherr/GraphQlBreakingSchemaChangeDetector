@@ -43,7 +43,7 @@ public class DisallowAddingNewMandatoryInputFields
         var breakingChanges = _schemaComparer.DetectBreakingChanges(oldSchema, newSchema);
 
         // Assert
-        Assert.Equal(1, breakingChanges.Count);
+        Assert.Single(breakingChanges);
         Assert.StartsWith("Violation of Rule SR 3:", breakingChanges[0].Message);
         Assert.Equal(12, breakingChanges[0].LineNumber);
     }
@@ -85,6 +85,6 @@ public class DisallowAddingNewMandatoryInputFields
         var breakingChanges = _schemaComparer.DetectBreakingChanges(oldSchema, newSchema);
 
         // Assert
-        Assert.Equal(0, breakingChanges.Count);
+        Assert.Empty(breakingChanges);
     }
 }

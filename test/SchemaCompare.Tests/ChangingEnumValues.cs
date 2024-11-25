@@ -52,7 +52,7 @@ public class ChangingEnumValues
         var breakingChanges = _schemaComparer.DetectBreakingChanges(oldSchema, newSchema);
 
         // Assert
-        Assert.Equal(1, breakingChanges.Count);
+        Assert.Single(breakingChanges);
         Assert.Equal(14, breakingChanges[0].LineNumber);
         Assert.StartsWith("Violation of Rule SR 2", breakingChanges[0].Message);
     }
@@ -95,7 +95,7 @@ public class ChangingEnumValues
         var breakingChanges = _schemaComparer.DetectBreakingChanges(oldSchema, newSchema);
 
         // Assert
-        Assert.Equal(0, breakingChanges.Count);
+        Assert.Empty(breakingChanges);
     }
 
     [Fact]
@@ -137,7 +137,7 @@ public class ChangingEnumValues
         var breakingChanges = _schemaComparer.DetectBreakingChanges(oldSchema, newSchema);
 
         // Assert
-        Assert.Equal(1, breakingChanges.Count);
+        Assert.Single(breakingChanges);
         Assert.Equal(13, breakingChanges[0].LineNumber);
         Assert.StartsWith("Violation of Rule SR 1", breakingChanges[0].Message);
     }
@@ -181,7 +181,7 @@ public class ChangingEnumValues
         var breakingChanges = _schemaComparer.DetectBreakingChanges(oldSchema, newSchema);
 
         // Assert
-        Assert.Equal(0, breakingChanges.Count);
+        Assert.Empty(breakingChanges);
     }
 
     [Fact]
@@ -230,7 +230,7 @@ public class ChangingEnumValues
         var breakingChanges = _schemaComparer.DetectBreakingChanges(oldSchema, newSchema);
 
         // Assert
-        Assert.Equal(0, breakingChanges.Count);
+        Assert.Empty(breakingChanges);
     }
 
     [Fact]
@@ -272,6 +272,6 @@ public class ChangingEnumValues
         var breakingChanges = _schemaComparer.DetectBreakingChanges(oldSchema, newSchema);
 
         // Assert
-        Assert.Equal(0, breakingChanges.Count);
+        Assert.Empty(breakingChanges);
     }
 }
